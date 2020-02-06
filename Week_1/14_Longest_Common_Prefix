@@ -1,0 +1,31 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        """ Longest common prefix"""
+        long_str = 'a'*10000
+        
+        if (len(strs)==0):
+            return ""
+        
+        # find shortest string --> longest possible common
+        for s in strs:
+            l = len(long_str)
+            
+            if len(s) < l:
+                long_str = s 
+        
+        #check with other strings
+        while (1):
+            old_len = len(long_str)
+            for s in strs:
+                if s.startswith(long_str) != True:
+                    long_str = long_str[:-1]
+                    break
+            if(old_len == len(long_str)):
+                break
+          
+        return long_str
+    
+        #O(nk)- time, O(k)-space
+            
+        
+        

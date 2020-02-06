@@ -1,0 +1,17 @@
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        
+        orig = ''
+        
+        for i in digits:
+            orig += str(i)
+            
+        #print(orig)
+        
+        final = str(int(orig) + 1)
+        
+        return list(map(int,final))
+        
+        # O(k)- time, O(k) -space
+        
+        
