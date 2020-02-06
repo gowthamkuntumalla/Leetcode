@@ -1,0 +1,12 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        """ find the hamming distance""" 
+#         diff = 0 
+        
+#         #loop to find the val
+#         while (x > 0 or y > 0):
+#             diff += 1 if x%2!=y%2 else 0
+#             x = x//2
+#             y = y//2
+        
+        return bin(x^y).count('1')
