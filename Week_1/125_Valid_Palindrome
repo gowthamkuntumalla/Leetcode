@@ -7,4 +7,5 @@ class Solution:
        
         for i in range(0,len(allowed_str)//2):            
             if(allowed_str[i]!=rev_str[i]):
+                return False
         return True
