@@ -1,0 +1,10 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        uniq = sum(set(nums))
+        total = sum(nums)
+        for i,val in enumerate(nums):
+            if total - 2*(uniq-val) == val:
+                return val
+        
+        # complexity: o(n)- time, o(n)-space
+            

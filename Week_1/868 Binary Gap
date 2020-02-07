@@ -1,0 +1,22 @@
+class Solution:
+    def binaryGap(self, N: int) -> int:
+        bin_num = bin(N)[2:]
+        ptr_l,ptr_r = 0,0
+        mx = 0
+        
+        while(ptr_r<len(bin_num)):
+            
+            if bin_num[ptr_l] != '1':
+                ptr_l+=1
+                ptr_r+=1
+            
+            else:
+                ptr_r+=1
+                if (ptr_r == len(bin_num)):
+                    break
+                if (bin_num[ptr_r] =='1'):
+                    mx = max(mx,ptr_r-ptr_l)
+                    ptr_l = ptr_r
+        return mx    
+    
+    #time - o(log(n)), space- o(log(n))

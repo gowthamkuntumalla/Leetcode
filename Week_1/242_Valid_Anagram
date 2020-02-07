@@ -1,0 +1,26 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        """ check for anagram using hashmaps"""
+        dict_s = {}
+        
+        #create hashmap of string 1
+        for c in s:
+            if c not in dict_s.keys():
+                dict_s[c] = 1
+            else:
+                dict_s[c] += 1
+        
+        # loop using str2 and subtract count in dict_s
+        keys = dict_s.keys()
+        #print(dict_s)
+        for c in t:
+            if (c in keys) and (dict_s[c]>0):
+                dict_s[c] -=1
+            else:
+                return False
+            
+        # check if all vals are zero:
+        #print(dict_s)
+        return  not sum([v for v in dict_s.values()])
+    
+    #complexity: o(max(m,n))- time, o(max(m,n))-space
