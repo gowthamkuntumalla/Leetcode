@@ -1,0 +1,14 @@
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        """using base 26, ord(), len() to find column value"""
+        l = len(s)
+        col = 0
+        
+        for i,let in enumerate(s):
+            col+= (ord(let)-ord('A')+1) * 26**(l-i-1)
+        
+        return col
+         
+        #time - o(n), space - o(1)
+            
+        
