@@ -1,0 +1,9 @@
+class Solution:
+    def transpose(self, A: List[List[int]]) -> List[List[int]]:
+        B = []
+        for new_row in zip(*A):
+            B.append(new_row)
+        return B
+
+        # time: O(R), space: O(R*C)
+        

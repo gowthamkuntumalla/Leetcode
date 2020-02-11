@@ -1,0 +1,21 @@
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowels = ['a','e','i','o','u','A',"E",'I',"O",'U']
+        
+        vow_list = []
+        ret = []
+        for c in s:
+            if c in vowels:
+                vow_list.append(c)
+        l = len(vow_list)        
+        i = 0
+        for c in s:
+            if c not in vowels:
+                ret.append(c)
+            else:
+                ret.append(vow_list[l-i-1])
+                i+=1
+        
+        return ''.join(ret)
+        
+        #time O(N), space O(N)

@@ -1,0 +1,45 @@
+class uf:
+    """Union Find data structure, parent of each disjoint set is stored"""
+    def __init__(self,n):
+        self.parent = [i for i in range(n)] # self as parent
+        
+    def find(self,i): # path compression
+        if self.parent[i] != i:
+            self.parent[i] = self.find(self.parent[i])
+        return self.parent[i]
+                
+    def union(self,i,j):
+        x_root = self.find(i)
+        y_root = self.find(j)
+        self.parent[x_root] = y_root
+
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        
+        l = len(M)
+        if (l < 2):
+            return l
+        
+        fc = uf(l) # friends circle as disjoint sets 
+        
+        for r in range(l):
+            for c in range(r+1,l):
+                if M[r][c] == 1:
+                    fc.union(r,c)
+                    print(r,c)
+        
+        print(fc.parent)
+        
+        return len(set([fc.find(i) for i in range(l)]))
+        
+        # time: O(N), space: O(N)
+    
+            
+        
+        
+        
+        
+        
+        
+        
+        

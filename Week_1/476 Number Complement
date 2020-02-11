@@ -1,0 +1,7 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        
+        lis = list(map(lambda x : '0' if x == '1' else '1', bin(num).lstrip('0b')))
+        return int(''.join(lis),2)
+        
+        # Time: O(logn), Space: O(logn)

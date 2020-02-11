@@ -1,0 +1,15 @@
+class Solution:
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
+        
+        B = []
+        
+        for row in A:
+            # flip on row
+            row = row[::-1]
+            # XOR
+            row = list(map(lambda x : 1^x, row))            
+            B.append(row)
+        
+        return B
+    
+    # time:O(R*C) space: O(R*C)
