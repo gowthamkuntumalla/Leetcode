@@ -1,0 +1,49 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+       
+        if board == []:
+            return        
+        R, C = len(board), len(board[0])
+        if R <= 2 or C <=2:
+            return
+        
+        def check_conn(r,c):
+            """ 
+            recursively look for connections to boundary 'O'. mark these 'O' with 'N' (not surrounded) 
+            """
+            if board[r][c] == 'X':
+                #print('ifX',r,c,board[r][c])
+                return
+            else:
+                board[r][c] = 'N'
+                for r,c in [(r-1,c), (r+1,c),(r,c-1),(r,c+1)]:
+                    if 0<=r<R and 0<=c<C and board[r][c] == 'O': 
+                        # check if they are on board
+                        board[r][c] = "N"
+                        check_conn(r,c)
+                        
+        for c in range(C): # top and bot boundaries
+            check_conn(0,c)
+            check_conn(R-1,c)
+            
+        for r in range(R): # left and right boundaries
+            check_conn(r,0)
+            check_conn(r,C-1)
+            
+        
+        
+        # change Ns to Os
+        for r in range(R):
+            for c in range(C):
+                if board[r][c] == "N":
+                    board[r][c] = "O"
+                else: 
+                    board[r][c] = "X"
+                    
+        return
+                
+        
+        
