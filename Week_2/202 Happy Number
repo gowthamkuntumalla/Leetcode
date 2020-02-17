@@ -1,0 +1,20 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        seen_nums = {}
+        sums = 0
+        
+        while (sums != 1):
+            digs = [int(c) for c in str(n)]
+            sums = 0
+            for i in digs:
+                sums+=i**2
+            
+            if sums in seen_nums.keys():
+                #print(list(seen_nums.keys()))
+                return False                        
+            
+            else:
+                seen_nums[sums] = 1
+                n=sums
+        
+        return True

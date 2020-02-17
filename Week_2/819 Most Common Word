@@ -1,0 +1,27 @@
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        freq_word = {}
+        
+        for c in "!?',;.":
+            paragraph = paragraph.replace(c," ")
+           
+        word_list = paragraph.split(" ")
+        for word in word_list:
+            word = word.lower()
+            if (word not in freq_word.keys()) and (word not in banned):
+                freq_word[word] = 1
+            
+            elif word not in banned:
+                freq_word[word] += 1
+        
+        max_v = -1
+        for k,v in freq_word.items():
+            if v >= max_v and len(k)>0:
+                max_v = v
+                ke = k
+        
+        return ke
+    
+    # time O(p+b)
+    
+            
