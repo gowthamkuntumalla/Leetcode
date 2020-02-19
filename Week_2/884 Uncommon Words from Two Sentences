@@ -1,0 +1,26 @@
+class Solution:
+    def uncommonFromSentences(self, A: str, B: str) -> List[str]:
+        
+        dict_A = {}
+        output = []
+        
+        for word in A.split(" "):
+            if word not in dict_A.keys():
+                dict_A[word] = 1
+            
+            else:
+                dict_A[word]+=1
+        a_k = dict_A.keys()
+        
+        for word in B.split(" "): 
+            if word in a_k:
+                dict_A[word]  = 0
+            
+            else:
+                dict_A[word] = 1
+                
+        for k,v in dict_A.items():
+            if v ==1:
+                output.append(k)
+                
+        return output

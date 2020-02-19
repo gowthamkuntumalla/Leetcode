@@ -1,0 +1,15 @@
+from collections import Counter
+
+class Solution:
+    
+    def frequencySort(self, s: str) -> str:
+        
+        freq = Counter(s)                
+        out = ''
+        
+        for k,v in freq.most_common():
+            out+=k*v
+            
+        return out
+            
+        
