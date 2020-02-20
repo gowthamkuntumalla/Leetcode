@@ -1,0 +1,23 @@
+from collections import Counter
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        
+        c = Counter()        
+        for line in cpdomains:
+            
+            count, domain = line.split(" ")            
+            dom_list = []
+            split_terms = domain.split(".")
+            
+            for i, term in enumerate(split_terms):
+                dom_list.append(".".join(split_terms[i:])) 
+                
+            for subd in dom_list:
+                c[subd] += int(count)
+        
+        result = []
+        
+        for dom,ct in c.items():
+            result.append(str(ct)+" "+ dom)
+        return result
+            

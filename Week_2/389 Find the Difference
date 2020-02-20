@@ -1,0 +1,16 @@
+from collections import Counter
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:        
+        t_c = Counter()  
+        
+        for ch in t:
+            t_c[ch] += 1
+        
+        for ch in s:
+            t_c[ch] -=1
+            
+        l = [k for k,v in t_c.items() if v == 1]
+            
+        return l[0]    
+        
