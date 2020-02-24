@@ -1,0 +1,36 @@
+from collections import Counter
+
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        """Give big notes out first"""
+        change = Counter({5:0,10:0,20:0})
+        
+        for order in bills:
+            if order == 5:
+                change[5]+=1
+                
+            elif order == 10:
+                change[10]+=1
+                
+                if change[5] > 0:
+                    change[5]-=1
+                else:
+                    return False
+            
+            else:
+                change[20] += 1
+                
+                if change[10] >=1 and change[5]>=1:
+                    change[10]-=1
+                    change[5]-=1
+                    
+                elif change[5]>=3:
+                    change[5]-=3
+                    
+                else:    
+                    return False
+        return True      
+                
+        
+        
+        
