@@ -1,0 +1,28 @@
+from collections import Counter
+
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        counter_p = Counter(p)
+        lp = len(p)
+        ls  = len(s)
+        result = []
+        
+        if ls<lp:
+            return []
+        
+        for i in range(ls-lp+1):
+            if i == 0:
+                moving_c = Counter(s[:lp])
+                last_ind = 0
+            else:
+                moving_c[s[last_ind]] -=1
+                if moving_c[s[last_ind]] ==0:
+                    del moving_c[s[last_ind]]
+                moving_c[s[last_ind+lp]] += 1
+                last_ind = i                
+            
+            if moving_c == counter_p:
+                result.append(i)
+        
+        return result
+        
