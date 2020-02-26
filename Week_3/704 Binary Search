@@ -1,0 +1,27 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        """Divide and conquer algo"""
+        
+        n = len(nums)
+        
+        if n == 0:
+            return -1
+        
+        if n == 1:
+            if target == nums[0] :
+                return 0
+            else:
+                return -1
+        
+        left_half = self.search(nums[0:n//2],target) 
+        
+        if left_half != -1:
+            return left_half
+        
+        else:
+            right_half = self.search(nums[n//2:],target)
+            
+            if right_half != -1:
+                return n//2 + right_half
+            
+        return -1
