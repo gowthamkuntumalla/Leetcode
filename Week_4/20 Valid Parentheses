@@ -1,0 +1,29 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        """ checks the vailidty of parantheses in the string"""
+        
+        pars = ['(', ')']
+        flo = ['{', '}']
+        sq = ['[',']']
+        
+        lopen = [pars[0],flo[0],sq[0]]
+        ropen = [pars[1],flo[1],sq[1]]
+        
+        stack = []
+               
+        for c in s:
+            
+            if c in lopen:
+                stack.append(c)
+            
+            else:                
+                r_ind = ropen.index(c)
+                
+                if (len(stack) == 0 or stack[-1] != lopen[r_ind]):
+                    return False
+                else:
+                    stack.pop()
+        if len(stack) == 0:
+            return True
+        return False
+          

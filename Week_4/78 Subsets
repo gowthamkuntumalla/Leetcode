@@ -1,0 +1,13 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        out = []
+        
+        def combos(prefix,nums,index,out):
+            out.append(sorted(prefix))
+                    
+            for i in range(index,len(nums)):
+                combos(prefix + [nums[i]], nums, i+1, out)
+               
+        combos([],sorted(nums),0,out)
+        return out
+                

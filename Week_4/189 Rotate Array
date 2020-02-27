@@ -1,0 +1,23 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+#         if k == 0:
+#             return
+        
+#         l = len(nums)
+#         list_a = nums[:l-k]
+#         list_b = nums[l-k:]
+        
+#         for i in range(len(list_b)):
+#             nums[i] = list_b[i]
+            
+            
+#         for j in range(len(list_a)):       
+#                 nums[j+i+1] = list_a[j]
+        l = len(nums)    
+        if (k>l):
+            k= k%l
+        nums[:] = nums[l-k:] + nums[:l-k]
+                
