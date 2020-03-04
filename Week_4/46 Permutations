@@ -1,0 +1,20 @@
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        
+        if len(nums) ==  1:
+            return [nums]
+        
+        else:
+            for i in range(len(nums)):               
+                next_perms = self.permute(nums[:i]+nums[i+1:])
+
+                for line in next_perms: 
+                    result.append([nums[i]] + line)
+            
+            return result
+            
+            
+        
+        
