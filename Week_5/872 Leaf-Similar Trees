@@ -1,0 +1,39 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
+        
+        def leaves(node):            
+            if not node: return []
+        
+            l = node.left
+            r = node.right
+            
+            if not l and not r:
+                return node.val
+            
+            res = []
+            
+            if l and (not l.left) and (not l.right):
+                res += [l.val]
+            else:
+                res+= leaves(l)
+                
+            if r and (not r.left) and (not r.right):
+                res += [r.val]
+            else:
+                res += leaves(r)
+        
+            return res            
+    
+        res1 = leaves(root1)
+        res2 = leaves(root2)
+        
+        return res1 == res2
+            
+        
