@@ -1,0 +1,22 @@
+from collections import Counter
+class Solution:
+    def numSpecialEquivGroups(self, A: List[str]) -> int:
+        evenCounter = Counter()
+        oddCounter = Counter()
+        groups = [] # list of tuples (evencounter, odcounter)
+        
+        for s in A:
+            
+            evenCounter = Counter(s[0::2])
+            if len(s)>1:
+                oddCounter = Counter(s[1::2])
+            else:
+                oddCounter = Counter()
+            
+            if (evenCounter,oddCounter) not in groups:                
+                groups.append((evenCounter,oddCounter))
+            
+        return len(groups)
+                              
+                            
+        

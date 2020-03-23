@@ -1,0 +1,26 @@
+#from collections import OrderedDict
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return [*map(s.index,s)] ==[*map(t.index,t)]
+        
+#         s_inds = [s.find(i) for i in s]
+#         t_inds = [t.find(i) for i in t]
+#         print(s_inds,t_inds)
+#         return s_inds == t_inds
+        
+#         def inds(st):
+#             sd = OrderedDict()
+#             for i,c in enumerate(st):
+#                 if c not in sd:
+#                     sd[c] = [i]
+#                 else:
+#                     sd[c].append(i)   
+#             return sd
+            
+#         sd = inds(s)
+#         td = inds(t)
+        
+#         #print(list(sd.values()),td.values())
+#         return list(sd.values()) == list(td.values())
+        
