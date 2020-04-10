@@ -1,0 +1,19 @@
+
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        l = str.split()
+        lookup = {}
+        if len(l) != len(pattern):
+            return False
+        
+        for i,c in enumerate(pattern):                     
+            if c not in lookup.keys():
+                if l[i] not in lookup.values() :
+                    lookup[c] = l[i]
+                else:
+                    return False
+                
+            elif lookup[c] != l[i]:
+                return False
+             
+        return True

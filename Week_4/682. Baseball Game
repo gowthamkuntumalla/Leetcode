@@ -1,0 +1,18 @@
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        valid = []
+        
+        for c in ops:
+            
+            if c.isdigit() or c[1:].isdigit():
+                valid.append(int(c))
+            elif c == "+":
+                valid.append(valid[-1] + valid[-2])
+            elif c == "D":
+                # print(valid)
+                valid.append(valid[-1]*2)
+            else:
+                valid.pop()
+                
+                
+        return sum(valid)
