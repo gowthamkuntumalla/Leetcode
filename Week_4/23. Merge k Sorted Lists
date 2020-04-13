@@ -1,0 +1,48 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+import bisect
+
+class Solution:
+    def mergeKLists(self, a: List[ListNode]) -> ListNode:
+        lists = []
+        for i,l in enumerate(a):
+            if l:
+                lists.append(l)
+        if not lists or not lists[0]:
+            return None
+        
+      
+        L = len(lists)
+        res = ListNode() 
+        head = res # head
+        lists.sort(key = lambda x : x.val) # list of pos on all k lists 
+        start = 0
+        
+        def insertNode(lists,node,beg,end):
+            """modifies lists inplace"""
+            x = node.val
+            while beg < end:
+                mid = (beg+end)//2
+                if x < lists[mid].val:
+                    end = mid
+                else:
+                    beg = mid+1
+            lists.insert(beg,node)    
+            # print(lists)
+        
+        while any(lists):
+            if lists[0]:
+                top = lists[0]
+                res.next = top
+                lists = lists[1:]
+                if top.next:
+                    insertNode(lists,top.next,0,len(lists))
+                res = top
+                
+            else:
+                lists = lists[1:]
+
+        return head.next  

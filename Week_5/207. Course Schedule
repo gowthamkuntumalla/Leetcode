@@ -1,0 +1,45 @@
+from collections import defaultdict
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """if cycle is detected then False else True  """
+        
+        if not prerequisites:
+            return True
+        
+        
+        def dfs_cycle(k):
+            # cycle detector for course 'k'
+            
+            if k in visited:
+                return False
+            
+            if k in visiting: 
+                # if seen again in the current dfs check
+                return True
+            
+            visiting.add(k)
+            
+            for req in preq[k]:
+                if dfs_cycle(req):
+                    return True
+                
+            visiting.remove(k)
+            visited.add(k)
+            return False   
+         
+        preq = defaultdict(list)
+        visiting = set()
+        visited = set()
+        
+        # build edges
+        for a, b in prerequisites:
+            preq[a].append(b)
+        
+        # check for each course
+        for course in range(numCourses):
+            if dfs_cycle(course):
+                return False
+        return True
+
+        
+        
