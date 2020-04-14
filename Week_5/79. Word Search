@@ -1,0 +1,29 @@
+from collections import defaultdict
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        
+        R,C = len(board), len(board[0])
+        L = len(word)
+        
+        def dfs(i,j,board,x):
+
+            if i< 0 or j< 0 or i>=R or j>= C or board[i][j] != word[x]:
+                return False
+            
+            temp = board[i][j]
+            board[i][j] = 1# visited
+
+            res = x == L-1 or dfs(i+1,j,board,x+1) or dfs(i-1,j,board,x+1) or dfs(i,j+1,board,x+1) or dfs(i,j-1,board,x+1)
+            
+            board[i][j] = temp
+            
+            return res
+     
+        for r in range(R):
+            for c in range(C):
+                if dfs(r,c,board,0):
+                    return True
+               
+                
+        return False
+        

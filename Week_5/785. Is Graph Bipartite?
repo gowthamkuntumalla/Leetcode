@@ -1,0 +1,25 @@
+from collections import deque
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        
+        colors = {}
+        
+        for a in range(len(graph)):
+            if a in colors:
+                continue
+            queue = deque([a])
+            colors[a] = 1 # seen in group 1
+            
+            while queue:
+                a = queue.popleft()
+                for b in graph[a]:
+                    if b in colors:
+                        if colors[b] == colors[a]:
+                            return False
+                    else:
+                        queue.append(b)
+                        colors[b] = colors[a]*-1 # seen in opposite group
+                        
+                        
+        return True
+        
