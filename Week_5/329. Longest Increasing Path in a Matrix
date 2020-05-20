@@ -1,0 +1,16 @@
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        
+        # matrix form
+        mat = {r+1j*c: num for r,row in enumerate(matrix) \
+               for c,num in enumerate(row)}
+        
+        res = {}
+        # DP 
+        
+        for z in sorted(mat,key = mat.get):
+            res[z] = 1 + max([res[Z]
+                             for Z in [z+1, z-1, z+1j, z-1j]
+                             if Z in mat and mat[z] > mat[Z]]
+                            or [0])
+        return max(res.values() or [0])

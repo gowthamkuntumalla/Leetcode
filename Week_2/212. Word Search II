@@ -1,0 +1,36 @@
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        # https://leetcode.com/problems/word-search-ii/discuss/59804/27-lines-uses-complex-numbers
+        
+        # tree of words
+        root = {} # a type of prefix tree
+        for word in words:
+            node = root
+            for c in word:
+                node = node.setdefault(c,{}) # setdefault(key,insert :-[,default])
+            node[''] = word
+        
+        ## Complex numbers dict
+        brd = {}
+        for R in range(len(board)):
+            for C in range(len(board[0])):
+                brd[R+1j*C] = board[R][C]
+                
+        result = []
+        
+        def search(node,z):
+            if '' in node:
+                result.append(node.pop(''))     
+            c = brd.get(z)
+            if c in node:
+                brd[z] = 1 # seen
+                for k in range(4):
+                    search(node[c],z+1j**k)
+                brd[z] = c
+            
+        
+        for z in brd:
+            search(root,z)
+        
+        return result
+        
