@@ -1,0 +1,16 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if not n:
+            return []
+        dp = {}
+        dp[1] = ["()"]
+       
+        for j in range(2,n+1):
+            res = set()
+            for x in dp[j-1]:
+                for i,c in enumerate(x):
+                    strr = x[:i]+ "()" + x[i:]
+                    res.add(strr)
+            dp[j] = list(res) 
+        return dp[n]
+        

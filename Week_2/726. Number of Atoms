@@ -1,0 +1,66 @@
+from collections import Counter
+class Solution:
+    def countOfAtoms(self, formula: str) -> str:
+        res = self.counter(formula)
+        strr = ''
+        for k in sorted(res.keys()):
+            if res[k] > 1:
+                strr += k+str(res[k])
+            else:
+                strr += k
+        return strr
+        
+        
+    def counter (self, word):
+        res = Counter()
+        if len(word) == 0:
+            return res
+        
+        digit = ''
+        element = ''
+        if '(' not in word:
+            for pos in range(len(word)-1,-1,-1):
+                c = word[pos]
+                if c.isupper():
+                    element = c + element
+                    if digit == '':
+                        digit = '1'
+                    res[element] += int(digit)
+                    #reset
+                    digit = ''
+                    element = ''
+                elif c.islower():
+                     element = c + element
+                elif c.isdigit():
+                    digit = c + digit 
+            return res
+                    
+        stack,begin = 0,0
+        for pos,c in enumerate(word):
+            if c == '(':
+                if stack == 0:
+                    res.update(self.counter(word[begin:pos]))
+                    posL = pos
+                stack +=1
+                
+            elif c ==')':
+                stack-=1
+                if stack == 0:
+                    if word[pos+1].isdigit():
+                        multiplier = word[pos+1]
+                        for j in range(pos+2,len(word)):
+                            if not word[j].isdigit():  
+                                break
+                            multiplier += word[j]
+                        if pos+1 == len(word)-1 :
+                            begin = pos+1
+                        else:
+                            begin = j 
+                        multiplier = int(multiplier)
+
+                    elif pos == len(word)-1 or isinstance(word[pos+1], str):
+                        multiplier = 1
+                    res += Counter({k:multiplier * v \
+                                for k,v in self.counter(word[posL+1:pos]).items()})
+
+        return res + self.counter(word[begin:]) 
