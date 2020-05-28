@@ -1,0 +1,14 @@
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        """ Find the minimum possible operations to convert word1 to word2"""
+       # Levenshtein distance, bottom up dp
+        m, n = len(word1),len(word2)
+        dp =  [[c for c in range(n+1)]] + [[r+1]+[0]*(n) for r in range(m)] 
+        
+        for r in range(m):
+            for c in range(n):
+                dp[r+1][c+1] = dp[r][c] if word1[r] == word2[c] else min(dp[r+1][c],dp[r][c+1],dp[r][c]) +1    
+        print (dp)
+        return dp[m][n]                   
+                
+                    

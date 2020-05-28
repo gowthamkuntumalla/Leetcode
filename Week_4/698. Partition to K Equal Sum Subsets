@@ -1,0 +1,31 @@
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        s = sum(nums)
+        if s % k or k == 0:
+            return False
+        target = s//k
+        nums.sort()
+        
+        if nums[-1] > target:
+            return False
+       
+        def dfs(curr,k,nums):
+            if curr > target:
+                return False
+            if curr == target:
+                k-=1
+                curr = 0
+            if not nums:
+                return True if not k else False
+                
+            for i in range(len(nums)):
+                if dfs(curr+nums[i],k,nums[:i]+nums[i+1:]):
+                    return True
+        
+        while nums and nums[-1] == target:
+            k-=1
+            nums.pop()
+            
+        return dfs(0,k,nums[::-1])
+        
+      
